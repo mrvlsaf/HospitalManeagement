@@ -1,4 +1,2 @@
 # HospitalManeagement
-A short project on hospital management using graphics and classes in C++.
-Happy Coding.
-
+A Project on Hospital Management using graphics and classes in C++.
