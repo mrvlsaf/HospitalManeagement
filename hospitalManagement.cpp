@@ -1,11 +1,10 @@
-#include <bits/stdc++.h>
-#include <fstream>
+#include <graphics.h>
+#include <fstream.h>
 #include <conio.h>
 #include <stdio.h>
 #include <string.h>
 #include <process.h>
 #include <dos.h>
-
 class Patient
 {
     int id;
@@ -117,7 +116,8 @@ void retake(Patient &p2)
             {
                 cout << " ID :\t" << p2.funid() << "is already in use. Please enter another ID: ";
                 p2.getid();
-            } while (p2.funid() == p3.funid());
+            }
+            while (p2.funid() == p3.funid());
             abc.seekg(0);
         }
     }
@@ -305,7 +305,7 @@ void info()
     cprintf(" \nInspired by Research, Driven by Compassion");
 
     gotoxy(5, 10);
-    cprintf("\nAddress: AA-3, Shalimarbagh,Delhi-110088\n");
+    cprintf("\nAddress: AA-3, Shalimar Bagh,Delhi-110088\n");
 
     gotoxy(5, 8);
     cprintf("\n We Provide Valueable and Reliable Services \n");
@@ -338,21 +338,21 @@ void show()
     }
 }
 
-color()
+void color()
 {
     clrscr();
 
     int gd = DETECT, gm;
-    initgraph(&gd, &gm, "c:/tc/bgi ");
+    initgraph(&gd, &gm, "c:/turboc3/bgi");
 
     setcolor(13);
 
     int i;
     for (i = 100; i < 150; i++)
     {
-        circle(300, 200, i);
+	circle(300, 200, i);
 
-        delay(30);
+	delay(30);
     }
     setcolor(WHITE);
     outtextxy(260, 200, "WELCOME TO ");
@@ -364,121 +364,119 @@ color()
     closegraph();
 }
 
-main()
+void main()
 {
     color();
     clrscr();
     textbackground(3);
     fstream abc;
     Patient p;
-    int ch, id1, f = 0;
+    int ch, id1;
     char cho;
     long pos;
     {
-        show();
+	show();
 
-        gotoxy(28, 10);
-        cprintf("Welcome To FORTIS HOSPITAL");
-        gotoxy(6, 13);
-        cprintf(" Made by Ritik & Bhavam ");
-        gotoxy(6, 15);
-        cprintf("Class: XII-A ");
-
-        getchar();
+	gotoxy(28, 10);
+	cprintf("Welcome To FORTIS HOSPITAL");
+	gotoxy(6, 13);
+	cprintf("Made by Ritik");
+	getchar();
     }
     {
-        clrscr();
-        show();
-        gotoxy(5, 8);
-        cout << "We Show Information About :";
-        gotoxy(5, 10);
-        cout << "-> PATIENT";
-        gotoxy(5, 11);
-        cout << "-> BILL";
-        gotoxy(5, 12);
-        cout << "->HOSPITAL ";
-        getchar();
+	clrscr();
+	show();
+	gotoxy(5, 8);
+	cout << "We Show Information About :";
+	gotoxy(5, 10);
+	cout << "-> PATIENT";
+	gotoxy(5, 11);
+	cout << "-> BILL";
+	gotoxy(5, 12);
+	cout << "->HOSPITAL ";
+	getchar();
     }
 
     do
     {
-        clrscr();
-        gotoxy(15, 2);
-        cout << "1. Admit New Patient";
-        gotoxy(15, 4);
-        cout << "2. Bill";
-        gotoxy(15, 6);
-        cout << "3. Search Record";
-        gotoxy(15, 8);
-        cout << "4. Modify Record";
-        gotoxy(15, 10);
-        cout << "5. Delete Record";
-        gotoxy(15, 12);
-        cout << "6. Count Total Records";
-        gotoxy(15, 14);
-        cout << "7. Information about Hospital";
-        gotoxy(15, 16);
-        cout << "0. Exit";
-        gotoxy(10, 20);
-        cout << "Enter your Choice - ";
-        cin >> ch;
-        switch (ch)
-        {
-        case 1:
-            writing();
-            break;
-        case 2:
-            clrscr();
-            abc.open("patient.dat", ios::in | ios::binary);
-            int f = 0;
-            if (!abc)
-            {
-                cout << "File not Present";
-                exit(1);
-            }
-            gotoxy(30, 10);
-            cout << "Enter Patient ID:\t";
-            cin >> id1;
-            while (!abc.eof())
-            {
-                pos = abc.tellg();
-                abc.read((char *)&p, sizeof(p));
-                if (abc.eof())
-                    break;
-                if (p.funid() == id1)
-                {
-                    f++;
+	clrscr();
+	gotoxy(15, 2);
+	cout << "1. Admit New Patient";
+	gotoxy(15, 4);
+	cout << "2. Bill";
+	gotoxy(15, 6);
+	cout << "3. Search Record";
+	gotoxy(15, 8);
+	cout << "4. Modify Record";
+	gotoxy(15, 10);
+	cout << "5. Delete Record";
+	gotoxy(15, 12);
+	cout << "6. Count Total Records";
+	gotoxy(15, 14);
+	cout << "7. Information about Hospital";
+	gotoxy(15, 16);
+	cout << "0. Exit";
+	gotoxy(10, 20);
+	cout << "Enter your Choice - ";
+	cin >> ch;
+	switch (ch)
+	{
+	case 1:
+	    writing();
+	    break;
+	case 2:
+	    clrscr();
+	    abc.open("patient.dat", ios::in | ios::binary);
+	    int f = 0;
+	    if (!abc)
+	    {
+		cout << "File not Present";
+		exit(1);
+	    }
+	    gotoxy(30, 10);
+	    cout << "Enter Patient ID:\t";
+	    cin >> id1;
+	    while (!abc.eof())
+	    {
+		pos = abc.tellg();
+		abc.read((char *)&p, sizeof(p));
+		if (abc.eof())
+		    break;
+		if (p.funid() == id1)
+		{
+		    f++;
 
-                    bill(p, pos);
-                }
-            }
+		    bill(p, pos);
+		}
+	    }
 
-            if (f == 0)
-            {
-                cout << "No Patient registered with PatientID: " << id1;
-            }
-            break;
-        case 3:
-            search();
-            break;
-        case 4:
-            modify();
-            break;
-        case 5:
-            del();
-            break;
-        case 6:
-            count();
-            break;
-        case 7:
-            info();
-            break;
-        case 0:
-            exit(0);
-        default:
-            cout << "Please Choose Correct Option";
-        }
-    } while (ch != 0);
+	    if (f == 0)
+	    {
+		cout << "No Patient registered with PatientID: " << id1;
+	    }
+	    break;
+	case 3:
+	    search();
+	    break;
+	case 4:
+	    modify();
+	    break;
+	case 5:
+	    del();
+	    break;
+	case 6:
+	    count();
+	    break;
+	case 7:
+	    info();
+	    break;
+	case 0:
+	    exit(0);
+	default:
+	    cout << "Please Choose Correct Option";
+	}
+    }
+    while (ch != 0);
     getch();
     abc.close();
 }
